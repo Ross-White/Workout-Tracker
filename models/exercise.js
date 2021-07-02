@@ -6,6 +6,7 @@ const exerciseSchema = new Schema({
     type: { type: String, required: true },
     name: { type: String, required: true },
     duration: Number,
+    distance: Number,
     weight: Number,
     reps: Number,
     sets: Number
