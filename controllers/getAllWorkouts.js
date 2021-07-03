@@ -1,13 +1,16 @@
 const db = require('../models');
 
-const getAllWorkoutsController = (req, res) => {
-    db.Workout.find({}, (err, dbWorkouts) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.json(dbWorkouts)
+const getAllWorkoutsController = async (req, res) => {
+    try {
+        const dbWorkouts = await db.Workout.find({});
+        if (!dbWorkouts) {
+            res.status(404).json({ message: 'No Workouts Found! ' });
+            return;
         }
-    });
+        res.status(200).json(dbWorkouts);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 };
 
 module.exports = getAllWorkoutsController;
