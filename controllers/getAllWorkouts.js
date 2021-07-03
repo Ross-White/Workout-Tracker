@@ -13,4 +13,5 @@ const getAllWorkoutsController = async (req, res) => {
     }
 };
 
+
 module.exports = getAllWorkoutsController;
