@@ -7,10 +7,15 @@ const workoutSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    exercise: [
+    exercises: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Exercise'
+            type: { type: String, required: true },
+            name: { type: String, required: true },
+            duration: Number,
+            distance: Number,
+            weight: Number,
+            reps: Number,
+            sets: Number
         }
     ]
 });
