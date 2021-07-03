@@ -1,7 +1,8 @@
 const db = require('../models');
 
-const updateWorkoutController = (req, res) => {
-    db.Workout.findOneAndUpdate({ _id: req.params.id },
+const updateWorkoutController = async (req, res) => {
+    try {
+    const updatedWorkout = await db.Workout.findOneAndUpdate({ _id: req.params.id },
         { $push: { exercises: { 
                 "type" : req.body.type,
                 "name" : req.body.name,
@@ -12,13 +13,15 @@ const updateWorkoutController = (req, res) => {
                 "sets" : req.body.sets
                 } 
             } },
-        { new: true })
-        .then((updatedWorkout) => {
-            res.json(updatedWorkout);
-        })
-    .catch((err) => {
-        res.json(err);
-    })
+        { new: true });
+        if (!updatedWorkout) {
+            res.status(404).json({ message: 'No Workout!' });
+            return;
+        }
+        res.status(200).json(updatedWorkout);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 };
 
 module.exports = updateWorkoutController;
