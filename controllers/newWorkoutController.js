@@ -2,9 +2,7 @@ const db = require('../models');
 
 const newWorkoutController = async (req, res) => {
     try {
-        const newWorkout = await db.Workout.create({
-            exercises: [req.body]
-        })
+        const newWorkout = await db.Workout.create({});
         if (!newWorkout) {
             res.status(404).json({ message: 'Unable to create workout' });
             return;
