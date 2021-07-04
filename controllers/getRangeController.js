@@ -1,8 +1,12 @@
 const db = require('../models');
 
-const getAllWorkoutsController = async (req, res) => {
+const getRangeController = async (req, res) => {
     try {
-        const dbWorkouts = await db.Workout.find({});
+        const dbWorkouts = await db.Workout.aggregate([{
+            $addFields: { totalDuration: { $sum: '$exercises.duration' }}
+        }])
+        .sort({ _id: -1 })
+        .limit(7);
         if (!dbWorkouts) {
             res.status(404).json({ message: 'No Workouts Found! ' });
             return;
@@ -14,4 +18,4 @@ const getAllWorkoutsController = async (req, res) => {
 };
 
 
-module.exports = getAllWorkoutsController;
+module.exports = getRangeController;
