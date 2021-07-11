@@ -29,8 +29,8 @@ The backend functionality of the app comes from Node.js, Express, MongoDB and Mo
 
 ## Contributions
 
-* Front end provided by Trilogy Education Services.
-* Back end built by Ross White.
+* Starter code built by Trilogy Education Services.
+* Refactored into a PWA, and for offline functionality by Ross White.
 
 ## Contact
 
